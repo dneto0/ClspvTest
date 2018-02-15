@@ -64,8 +64,10 @@ set(CLSHADER_SOURCE_DIR ${PROJECT_SOURCE_DIR}/kernels)
 set(CLSHADER_OUTPUT_DIR ${PROJECT_SOURCE_DIR}/assets/shaders_cl)
 set(CLSHADER_NOINLINE_DIR ${PROJECT_SOURCE_DIR}/assets/shaders_small_cl)
 
-set(CLSPV_COMMAND /usr/local/bin/clspv)
-set(SPRIV_OPT_COMMAND /usr/local/bin/spirv-opt)
+#set(CLSPV_COMMAND /usr/local/bin/clspv)
+#set(SPRIV_OPT_COMMAND /usr/local/bin/spirv-opt)
+set(CLSPV_COMMAND clspv)
+set(SPRIV_OPT_COMMAND spirv-opt)
 
 set(CLSPV_SAMPLERMAP ${CLSHADER_SOURCE_DIR}/sampler_map)
 
