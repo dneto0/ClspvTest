@@ -17,9 +17,13 @@
 cmake_minimum_required(VERSION 3.4.1)
 
 # locations of required external tools
-set(CLSPV_COMMAND /usr/local/bin/clspv)
-set(SPRIV_OPT_COMMAND /usr/local/bin/spirv-opt)
-set(GLSLANG_COMMAND /usr/local/bin/glslangValidator)
+#set(CLSPV_COMMAND /usr/local/bin/clspv)
+#set(SPRIV_OPT_COMMAND /usr/local/bin/spirv-opt)
+#set(GLSLANG_COMMAND /usr/local/bin/glslangValidator)
+
+set(CLSPV_COMMAND clspv)
+set(SPRIV_OPT_COMMAND spirv-opt)
+set(GLSLANG_COMMAND glslangValidatorm)
 
 # build native_app_glue as a static lib
 set(${CMAKE_C_FLAGS}, "${CMAKE_C_FLAGS}")
