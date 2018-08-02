@@ -54,7 +54,7 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
   auto& device = kernel.getDevice();
 
   // We'll test a 16x16 grid, so we need 256 entries
-  const vk::Extent3D bufferExtent(256, 1, 1);
+  const vk::Extent3D bufferExtent(16, 16, 1);
   const std::size_t buffer_length =
       bufferExtent.width * bufferExtent.height * bufferExtent.depth;
   const std::size_t buffer_size = buffer_length * sizeof(float);
