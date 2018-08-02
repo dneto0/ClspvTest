@@ -208,6 +208,25 @@ namespace test_utils {
         const bool pixel_is_correct = pixel_compare(observed, expected);
         if (pixel_is_correct) {
             ++result.mNumCorrect;
+            if (verbose) {
+                const std::string expectedString = pixels::traits<decltype(expected_pixel)>::toString(
+                        expected_pixel);
+                const std::string observedString = pixels::traits<decltype(observed_pixel)>::toString(
+                        observed_pixel);
+
+                const std::string expectedPromotionString = pixels::traits<decltype(expected)>::toString(
+                        expected);
+                const std::string observedPromotionString = pixels::traits<decltype(observed)>::toString(
+                        observed);
+
+                std::ostringstream os;
+                os << (pixel_is_correct ? "CORRECT  " : "INCORRECT")
+                   << ": pixel{x:" << coord.width << ", y:" << coord.height << ", z:" << coord.depth << "}"
+                   << " expected:" << expectedString << " observed:" << observedString
+                   << " expectedPromotion:" << expectedPromotionString << " observedPromotion:"
+                   << observedPromotionString;
+                result.mMessages.push_back(os.str());
+            }
         }
         else {
             ++result.mNumErrors;
