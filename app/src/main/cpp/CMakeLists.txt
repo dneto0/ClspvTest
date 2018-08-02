@@ -57,6 +57,7 @@ add_library(native-activity SHARED
         clspv_utils.cpp
         getline_crlf_savvy.cpp
         gpu_types.cpp
+        signcmp_kernel.cpp
         test_manifest.cpp
         test_result_logging.cpp
         test_utils.cpp
@@ -100,6 +101,7 @@ set(OPENCL_KERNELS
         ReadConstantData
         StructArrays
         TestComparisons
+	signcmp
         )
 
 set(kernel_binaries)

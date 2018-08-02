@@ -13,6 +13,7 @@
 #include "resample2dimage_kernel.hpp"
 #include "resample3dimage_kernel.hpp"
 #include "strangeshuffle_kernel.hpp"
+#include "signcmp_kernel.hpp"
 #include "testgreaterthanorequalto_kernel.hpp"
 
 #include "util.hpp" // for LOGxx macros
@@ -52,6 +53,7 @@ namespace
                 std::make_pair("readConstantData",   createGenerator(readconstantdata_kernel::getAllTestVariants)),
                 std::make_pair("strangeShuffle",     createGenerator(strangeshuffle_kernel::getAllTestVariants)),
                 std::make_pair("testGtEq",           createGenerator(testgreaterthanorequalto_kernel::getAllTestVariants)),
+                std::make_pair("signcmp",            createGenerator(signcmp_kernel::getAllTestVariants)),
         };
 
         test_utils::KernelTest::invocation_tests result;
