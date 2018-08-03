@@ -96,7 +96,8 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
                                 ? result
                                 : 0.0f);
                   });
-  } else if (kernel.getEntryPoint() == "greaterthan_const") {
+  } else if ((kernel.getEntryPoint() == "greaterthan_const") ||
+             (kernel.getEntryPoint() == "greaterthan_const_vec")) {
     offset = 0;
     std::generate(expectedResults.begin(), expectedResults.end(),
                   [&index, bufferExtent, offset]() {
