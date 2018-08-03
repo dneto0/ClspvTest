@@ -124,13 +124,60 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
                         value = (x_cmp > 0) ? 1.0f : -1.0f;
                         break;
                       case 5:
-                        value = (x_cmp > 2) ? 1.0f : -1.0f;
+                        value = (x_cmp > 1) ? 1.0f : -1.0f;
                         break;
                       case 6:
-                        value = (x_cmp > 3) ? 1.0f : -1.0f;
+                        value = (x_cmp > 2) ? 1.0f : -1.0f;
                         break;
                       case 7:
-                        value = (x_cmp > 4) ? 1.0f : -1.0f;
+                        value = (x_cmp > 3) ? 1.0f : -1.0f;
+                        break;
+                      default:
+                        break;
+                    }
+
+                    ++index;
+
+                    return (x < bufferExtent.width && y < bufferExtent.height
+                                ? value
+                                : 0.0f);
+                  });
+  } else if (kernel.getEntryPoint() == "greaterthan_const_left") {
+    // Note: This gets converted to OpSLessThan (!)
+    offset = 0;
+    std::generate(expectedResults.begin(), expectedResults.end(),
+                  [&index, bufferExtent, offset]() {
+                    const int inWidth = bufferExtent.width;
+                    int x = index % inWidth;
+                    int y = index / inWidth;
+
+                    int x_cmp = x + offset;
+
+                    float value = 0.0f;
+                    switch (y) {
+                      case 0:
+                        value = (-4 > x_cmp) ? 1.0f : -1.0f;
+                        break;
+                      case 1:
+                        value = (-3 > x_cmp) ? 1.0f : -1.0f;
+                        break;
+                      case 2:
+                        value = (-2 > x_cmp) ? 1.0f : -1.0f;
+                        break;
+                      case 3:
+                        value = (-1 > x_cmp) ? 1.0f : -1.0f;
+                        break;
+                      case 4:
+                        value = (0 > x_cmp) ? 1.0f : -1.0f;
+                        break;
+                      case 5:
+                        value = (1 > x_cmp) ? 1.0f : -1.0f;
+                        break;
+                      case 6:
+                        value = (2 > x_cmp) ? 1.0f : -1.0f;
+                        break;
+                      case 7:
+                        value = (3 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       default:
                         break;

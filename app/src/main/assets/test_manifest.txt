@@ -146,3 +146,4 @@ test2d TestGreaterThanOrEqualTo testGtEq 32 32
 module shaders_cl/signcmp
 test2d greaterthan signcmp 16 16
 test2d greaterthan_const signcmp 8 8
+test2d greaterthan_const_left signcmp 8 8
