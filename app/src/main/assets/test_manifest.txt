@@ -145,3 +145,4 @@ test2d TestGreaterThanOrEqualTo testGtEq 32 32
 # Test signed integer greater than on non-constant data
 module shaders_cl/signcmp
 test2d greaterthan signcmp 16 16
+test2d greaterthan_const signcmp 8 8
