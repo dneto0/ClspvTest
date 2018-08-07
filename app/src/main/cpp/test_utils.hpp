@@ -223,8 +223,9 @@ namespace test_utils {
                 os << (pixel_is_correct ? "CORRECT  " : "INCORRECT")
                    << ": pixel{x:" << coord.width << ", y:" << coord.height << ", z:" << coord.depth << "}"
                    << " expected:" << expectedString << " observed:" << observedString
-                   << " expectedPromotion:" << expectedPromotionString << " observedPromotion:"
-                   << observedPromotionString;
+                   // << " expectedPromotion:" << expectedPromotionString << " observedPromotion:"
+                   // << observedPromotionString;
+                   ;
                 result.mMessages.push_back(os.str());
             }
         }
@@ -245,8 +246,9 @@ namespace test_utils {
                 os << (pixel_is_correct ? "CORRECT  " : "INCORRECT")
                    << ": pixel{x:" << coord.width << ", y:" << coord.height << ", z:" << coord.depth << "}"
                    << " expected:" << expectedString << " observed:" << observedString
-                   << " expectedPromotion:" << expectedPromotionString << " observedPromotion:"
-                   << observedPromotionString;
+                   //<< " expectedPromotion:" << expectedPromotionString << " observedPromotion:"
+                   //<< observedPromotionString;
+                   ;
                 result.mMessages.push_back(os.str());
             }
         }
