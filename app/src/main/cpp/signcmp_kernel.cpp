@@ -119,7 +119,7 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
                         value = (x_cmp > -2) ? 1.0f : -1.0f;
                         break;
                       case 3:
-                        value = (x_cmp >  1) ? 1.0f : -1.0f;
+                        value = (x_cmp > 1) ? 1.0f : -1.0f;
                         break;
                       case 4:
                         value = (x_cmp > 0) ? 1.0f : -1.0f;
@@ -157,16 +157,16 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
                     float value = 0.0f;
                     switch (y) {
                       case 0:
-                        value = ( 4 > x_cmp) ? 1.0f : -1.0f;
+                        value = (-4 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 1:
-                        value = (-3 > x_cmp) ? 1.0f : -1.0f;
+                        value = (3 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 2:
-                        value = ( 2 > x_cmp) ? 1.0f : -1.0f;
+                        value = (-2 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 3:
-                        value = (-1 > x_cmp) ? 1.0f : -1.0f;
+                        value = (1 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 4:
                         value = (0 > x_cmp) ? 1.0f : -1.0f;
