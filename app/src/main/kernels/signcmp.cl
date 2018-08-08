@@ -107,7 +107,7 @@ kernel void greaterthan_const_vec(__global int* outDest, int inWidth,
   int x = (int)get_global_id(0);
   int y = (int)get_global_id(1);
   int xcmp = x + offset;
-  int2 x_cmp2 = (int2)(xcmp, xcmp+1);
+  int2 x_cmp2 = (x & 1) ? (int2)(xcmp - 1, xcmp) : (int2)(xcmp, xcmp + 1);
 
   int index = (y * inWidth) + x;
 
