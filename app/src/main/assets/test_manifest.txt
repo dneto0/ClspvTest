@@ -142,9 +142,13 @@ module shaders_small_cl/TestComparisons
 test2d TestGreaterThanOrEqualTo testGtEq 32 32
 #
 #
-# Test signed integer greater than on non-constant data
+# Test signed integer comparisons
 module shaders_cl/signcmp
 test2d greaterthan signcmp 16 16
+test2d lessthan signcmp 16 16
+test2d greaterequal signcmp 16 16
+test2d lessequal signcmp 16 16
+test2d greaterthan_m2 signcmp 16 16
 test2d greaterthan_const signcmp 8 8
-test2d greaterthan_const_vec signcmp 8 8
 test2d greaterthan_const_left signcmp 8 8
+test2d greaterthan_const_vec signcmp 8 8

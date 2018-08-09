@@ -53,7 +53,13 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
   test_utils::InvocationResult invocationResult;
   auto& device = kernel.getDevice();
 
-  const int grid_side = (kernel.getEntryPoint() == "greaterthan" ? 16 : 8);
+  int grid_side = 8;
+  if (kernel.getEntryPoint() == "greaterthan" ||
+      kernel.getEntryPoint() == "lessthan" ||
+      kernel.getEntryPoint() == "greaterequal" ||
+      kernel.getEntryPoint() == "lessequal") {
+    grid_side = 16;
+  }
 
   const vk::Extent3D bufferExtent(grid_side, grid_side, 1);
   const std::size_t buffer_length =
@@ -77,14 +83,15 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
   std::vector<float> expectedResults(buffer_length);
   if (kernel.getEntryPoint() == "greaterthan") {
     offset = -grid_side / 2;
+    offset = 8;
     std::generate(expectedResults.begin(), expectedResults.end(),
                   [&index, bufferExtent, offset]() {
                     const int inWidth = bufferExtent.width;
                     int x = index % inWidth;
                     int y = index / inWidth;
 
-                    int x_cmp = x + offset;
-                    int y_cmp = y + offset;
+                    int x_cmp = x - offset + 3;
+                    int y_cmp = offset - 1 - y;
                     float result = 0.0f;
                     if (x < inWidth && y < inWidth) {
                       result = (x_cmp > y_cmp) ? 1.0 : -1.0f;
@@ -96,8 +103,94 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
                                 ? result
                                 : 0.0f);
                   });
+  } else if (kernel.getEntryPoint() == "lessthan") {
+    offset = 8;
+    std::generate(expectedResults.begin(), expectedResults.end(),
+                  [&index, bufferExtent, offset]() {
+                    const int inWidth = bufferExtent.width;
+                    int x = index % inWidth;
+                    int y = index / inWidth;
+
+                    int x_cmp = x - offset + 3;
+                    int y_cmp = offset - 1 - y;
+                    float result = 0.0f;
+                    if (x < inWidth && y < inWidth) {
+                      result = (x_cmp < y_cmp) ? 1.0 : -1.0f;
+                    }
+
+                    ++index;
+
+                    return (x < bufferExtent.width && y < bufferExtent.height
+                                ? result
+                                : 0.0f);
+                  });
+  } else if (kernel.getEntryPoint() == "greaterequal") {
+    offset = -grid_side / 2;
+    offset = 8;
+    std::generate(expectedResults.begin(), expectedResults.end(),
+                  [&index, bufferExtent, offset]() {
+                    const int inWidth = bufferExtent.width;
+                    int x = index % inWidth;
+                    int y = index / inWidth;
+
+                    int x_cmp = x - offset + 3;
+                    int y_cmp = offset - 1 - y;
+                    float result = 0.0f;
+                    if (x < inWidth && y < inWidth) {
+                      result = (x_cmp >= y_cmp) ? 1.0 : -1.0f;
+                    }
+
+                    ++index;
+
+                    return (x < bufferExtent.width && y < bufferExtent.height
+                                ? result
+                                : 0.0f);
+                  });
+  } else if (kernel.getEntryPoint() == "lessequal") {
+    offset = 8;
+    std::generate(expectedResults.begin(), expectedResults.end(),
+                  [&index, bufferExtent, offset]() {
+                    const int inWidth = bufferExtent.width;
+                    int x = index % inWidth;
+                    int y = index / inWidth;
+
+                    int x_cmp = x - offset + 3;
+                    int y_cmp = offset - 1 - y;
+                    float result = 0.0f;
+                    if (x < inWidth && y < inWidth) {
+                      result = (x_cmp <= y_cmp) ? 1.0 : -1.0f;
+                    }
+
+                    ++index;
+
+                    return (x < bufferExtent.width && y < bufferExtent.height
+                                ? result
+                                : 0.0f);
+                  });
+  } else if (kernel.getEntryPoint() == "greaterthan_m2") {
+    offset = -3;
+    std::generate(expectedResults.begin(), expectedResults.end(),
+                  [&index, bufferExtent, offset]() {
+                    const int inWidth = bufferExtent.width;
+                    int x = index % inWidth;
+                    int y = index / inWidth;
+
+                    int x_cmp = x + offset;
+                    int y_cmp = y + offset;
+                    float result = 0.0f;
+                    if (x < inWidth && y < inWidth) {
+                      result = (x_cmp > -3) ? 1.0 : -1.0f;
+                    }
+
+                    ++index;
+
+                    return (x < bufferExtent.width && y < bufferExtent.height
+                                ? result
+                                : 0.0f);
+                  });
   } else if ((kernel.getEntryPoint() == "greaterthan_const") ||
-             (kernel.getEntryPoint() == "greaterthan_const_vec")) {
+             (kernel.getEntryPoint() == "greaterthan_const_vec2") ||
+             (kernel.getEntryPoint() == "greaterthan_const_vec4")) {
     offset = 0;
     std::generate(expectedResults.begin(), expectedResults.end(),
                   [&index, bufferExtent, offset]() {
@@ -106,34 +199,32 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
                     int y = index / inWidth;
 
                     int x_cmp = x + offset;
-                    float fake_float_one = 5.0f;
-                    float fake_float_mone = -7.0f;
 
                     float value = 0.0f;
                     switch (y) {
                       case 0:
-                        value = (x_cmp > -4) ? fake_float_one : fake_float_mone;
+                        value = (x_cmp > -4) ? 1.0f : -1.0f;
                         break;
                       case 1:
-                        value = (x_cmp > 3) ? fake_float_one : fake_float_mone;
+                        value = (x_cmp > 3) ? 1.0f : -1.0f;
                         break;
                       case 2:
-                        value = (x_cmp > -2) ? fake_float_one : fake_float_mone;
+                        value = (x_cmp > -2) ? 1.0f : -1.0f;
                         break;
                       case 3:
-                        value = (x_cmp > 1) ? fake_float_one : fake_float_mone;
+                        value = (x_cmp > 1) ? 1.0f : -1.0f;
                         break;
                       case 4:
-                        value = (x_cmp > 0) ? fake_float_one : fake_float_mone;
+                        value = (x_cmp > 0) ? 1.0f : -1.0f;
                         break;
                       case 5:
-                        value = (x_cmp > -1) ? fake_float_one : fake_float_mone;
+                        value = (x_cmp > -1) ? 1.0f : -1.0f;
                         break;
                       case 6:
-                        value = (x_cmp > 2) ? fake_float_one : fake_float_mone;
+                        value = (x_cmp > 2) ? 1.0f : -1.0f;
                         break;
                       case 7:
-                        value = (x_cmp > -3) ? fake_float_one : fake_float_mone;
+                        value = (x_cmp > -3) ? 1.0f : -1.0f;
                         break;
                       default:
                         break;
@@ -156,34 +247,31 @@ test_utils::InvocationResult test(clspv_utils::kernel& kernel,
 
                     int x_cmp = x + offset;
 
-                    float fake_float_one = 5.0f;
-                    float fake_float_mone = -7.0f;
-
                     float value = 0.0f;
                     switch (y) {
                       case 0:
-                        value = (-4 > x_cmp) ? fake_float_one : fake_float_mone;
+                        value = (-4 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 1:
-                        value = (3 > x_cmp) ? fake_float_one : fake_float_mone;
+                        value = (3 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 2:
-                        value = (-2 > x_cmp) ? fake_float_one : fake_float_mone;
+                        value = (-2 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 3:
-                        value = (1 > x_cmp) ? fake_float_one : fake_float_mone;
+                        value = (1 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 4:
-                        value = (0 > x_cmp) ? fake_float_one : fake_float_mone;
+                        value = (0 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 5:
-                        value = (-1 > x_cmp) ? fake_float_one : fake_float_mone;
+                        value = (-1 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 6:
-                        value = (2 > x_cmp) ? fake_float_one : fake_float_mone;
+                        value = (2 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       case 7:
-                        value = (-3 > x_cmp) ? fake_float_one : fake_float_mone;
+                        value = (-3 > x_cmp) ? 1.0f : -1.0f;
                         break;
                       default:
                         break;
