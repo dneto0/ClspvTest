@@ -151,4 +151,5 @@ test2d lessequal signcmp 16 16
 test2d greaterthan_m2 signcmp 16 16
 test2d greaterthan_const signcmp 8 8
 test2d greaterthan_const_left signcmp 8 8
-test2d greaterthan_const_vec signcmp 8 8
+test2d greaterthan_const_vec2 signcmp 8 8
+test2d greaterthan_const_vec4 signcmp 8 8
