@@ -44,112 +44,113 @@ vkValidation all
 #
 #
 #
+verbosity full
 module shaders_cl/StructArrays
 test2d FillStructArray fillarraystruct 32 1
 #
-module shaders_small_cl/StructArrays
-test2d FillStructArray fillarraystruct 32 1
-#
-#
-#
-module shaders_cl/LocalMemory
-test2d StrangeShuffle strangeShuffle 1024 1
-#
-module shaders_small_cl/LocalMemory
-test2d StrangeShuffle strangeShuffle 1024 1
-#
-module shaders/GL_LocalMemory
-test2d main strangeShuffle 1024 1
-#
-#
-#
-module shaders_cl/localsize
-test2d ReadLocalSize readLocalSize 32 32 global_id_x
-test2d ReadLocalSize readLocalSize 32 32 global_id_y
-test2d ReadLocalSize readLocalSize 32 32 global_id_z
-test2d ReadLocalSize readLocalSize 32 32 group_id_x
-test2d ReadLocalSize readLocalSize 32 32 group_id_y
-test2d ReadLocalSize readLocalSize 32 32 group_id_z
-test2d ReadLocalSize readLocalSize 32 32 local_id_x
-test2d ReadLocalSize readLocalSize 32 32 local_id_y
-test2d ReadLocalSize readLocalSize 32 32 local_id_z
-test2d ReadLocalSize readLocalSize 32 32 global_size_x
-test2d ReadLocalSize readLocalSize 32 32 global_size_y
-test2d ReadLocalSize readLocalSize 32 32 global_size_z
-test2d ReadLocalSize readLocalSize 32 32 local_size_x
-test2d ReadLocalSize readLocalSize 32 32 local_size_y
-test2d ReadLocalSize readLocalSize 32 32 local_size_z
-#
-module shaders_small_cl/localsize
-test2d ReadLocalSize readLocalSize 32 32 global_id_x
-test2d ReadLocalSize readLocalSize 32 32 global_id_y
-test2d ReadLocalSize readLocalSize 32 32 global_id_z
-test2d ReadLocalSize readLocalSize 32 32 group_id_x
-test2d ReadLocalSize readLocalSize 32 32 group_id_y
-test2d ReadLocalSize readLocalSize 32 32 group_id_z
-test2d ReadLocalSize readLocalSize 32 32 local_id_x
-test2d ReadLocalSize readLocalSize 32 32 local_id_y
-test2d ReadLocalSize readLocalSize 32 32 local_id_z
-test2d ReadLocalSize readLocalSize 32 32 global_size_x
-test2d ReadLocalSize readLocalSize 32 32 global_size_y
-test2d ReadLocalSize readLocalSize 32 32 global_size_z
-test2d ReadLocalSize readLocalSize 32 32 local_size_x
-test2d ReadLocalSize readLocalSize 32 32 local_size_y
-test2d ReadLocalSize readLocalSize 32 32 local_size_z
-#
-#
-#
-module shaders_cl/Fills
-test2d FillWithColorKernel fill 32 32 -w 64 -h 64
-test2d FillWithColorKernel fill 32 32 -w 1080 -h 720
-#
-module shaders_small_cl/Fills
-test2d FillWithColorKernel fill 32 32 -w 64 -h 64
-test2d FillWithColorKernel fill 32 32 -w 1080 -h 720
-#
-module shaders/GL_Fills_reduced
-test2d main fill<float4> 32 32 -w 64 -h 64
-test2d main fill<float4> 32 32 -w 1080 -h 720
-#
-#
-#
-module shaders_cl/Memory
-test2d CopyBufferToImageKernel copyBufferToImage 32 32
-test2d CopyImageToBufferKernel copyImageToBuffer 32 32
-test2d Resample2DImage resample2dimage 32 32
-test3d Resample3DImage resample3dimage 32 32 32
-#
-module shaders_small_cl/Memory
-test2d CopyBufferToImageKernel copyBufferToImage 32 32
-test2d CopyImageToBufferKernel copyImageToBuffer 32 32
-#
-#
-#
-module shaders_cl/ReadConstantData
-test2d ReadConstantArray readConstantData 32 1
-test2d ReadConstantStruct readConstantData 32 1
-#
-module shaders_small_cl/ReadConstantData
-test2d ReadConstantArray readConstantData 32 1
-test2d ReadConstantStruct readConstantData 32 1
-#
-#
-#
-module shaders_cl/TestComparisons
-test2d TestGreaterThanOrEqualTo testGtEq 32 32
-#
-module shaders_small_cl/TestComparisons
-test2d TestGreaterThanOrEqualTo testGtEq 32 32
-#
-#
-# Test signed integer comparisons
-module shaders_cl/signcmp
-test2d greaterthan signcmp 16 16
-test2d lessthan signcmp 16 16
-test2d greaterequal signcmp 16 16
-test2d lessequal signcmp 16 16
-test2d greaterthan_m2 signcmp 16 16
-test2d greaterthan_const signcmp 8 8
-test2d greaterthan_const_left signcmp 8 8
-test2d greaterthan_const_vec2 signcmp 8 8
-test2d greaterthan_const_vec4 signcmp 8 8
+# module shaders_small_cl/StructArrays
+# test2d FillStructArray fillarraystruct 32 1
+# #
+# #
+# #
+# module shaders_cl/LocalMemory
+# test2d StrangeShuffle strangeShuffle 1024 1
+# #
+# module shaders_small_cl/LocalMemory
+# test2d StrangeShuffle strangeShuffle 1024 1
+# #
+# module shaders/GL_LocalMemory
+# test2d main strangeShuffle 1024 1
+# #
+# #
+# #
+# module shaders_cl/localsize
+# test2d ReadLocalSize readLocalSize 32 32 global_id_x
+# test2d ReadLocalSize readLocalSize 32 32 global_id_y
+# test2d ReadLocalSize readLocalSize 32 32 global_id_z
+# test2d ReadLocalSize readLocalSize 32 32 group_id_x
+# test2d ReadLocalSize readLocalSize 32 32 group_id_y
+# test2d ReadLocalSize readLocalSize 32 32 group_id_z
+# test2d ReadLocalSize readLocalSize 32 32 local_id_x
+# test2d ReadLocalSize readLocalSize 32 32 local_id_y
+# test2d ReadLocalSize readLocalSize 32 32 local_id_z
+# test2d ReadLocalSize readLocalSize 32 32 global_size_x
+# test2d ReadLocalSize readLocalSize 32 32 global_size_y
+# test2d ReadLocalSize readLocalSize 32 32 global_size_z
+# test2d ReadLocalSize readLocalSize 32 32 local_size_x
+# test2d ReadLocalSize readLocalSize 32 32 local_size_y
+# test2d ReadLocalSize readLocalSize 32 32 local_size_z
+# #
+# module shaders_small_cl/localsize
+# test2d ReadLocalSize readLocalSize 32 32 global_id_x
+# test2d ReadLocalSize readLocalSize 32 32 global_id_y
+# test2d ReadLocalSize readLocalSize 32 32 global_id_z
+# test2d ReadLocalSize readLocalSize 32 32 group_id_x
+# test2d ReadLocalSize readLocalSize 32 32 group_id_y
+# test2d ReadLocalSize readLocalSize 32 32 group_id_z
+# test2d ReadLocalSize readLocalSize 32 32 local_id_x
+# test2d ReadLocalSize readLocalSize 32 32 local_id_y
+# test2d ReadLocalSize readLocalSize 32 32 local_id_z
+# test2d ReadLocalSize readLocalSize 32 32 global_size_x
+# test2d ReadLocalSize readLocalSize 32 32 global_size_y
+# test2d ReadLocalSize readLocalSize 32 32 global_size_z
+# test2d ReadLocalSize readLocalSize 32 32 local_size_x
+# test2d ReadLocalSize readLocalSize 32 32 local_size_y
+# test2d ReadLocalSize readLocalSize 32 32 local_size_z
+# #
+# #
+# #
+# module shaders_cl/Fills
+# test2d FillWithColorKernel fill 32 32 -w 64 -h 64
+# test2d FillWithColorKernel fill 32 32 -w 1080 -h 720
+# #
+# module shaders_small_cl/Fills
+# test2d FillWithColorKernel fill 32 32 -w 64 -h 64
+# test2d FillWithColorKernel fill 32 32 -w 1080 -h 720
+# #
+# module shaders/GL_Fills_reduced
+# test2d main fill<float4> 32 32 -w 64 -h 64
+# test2d main fill<float4> 32 32 -w 1080 -h 720
+# #
+# #
+# #
+# module shaders_cl/Memory
+# test2d CopyBufferToImageKernel copyBufferToImage 32 32
+# test2d CopyImageToBufferKernel copyImageToBuffer 32 32
+# test2d Resample2DImage resample2dimage 32 32
+# test3d Resample3DImage resample3dimage 32 32 32
+# #
+# module shaders_small_cl/Memory
+# test2d CopyBufferToImageKernel copyBufferToImage 32 32
+# test2d CopyImageToBufferKernel copyImageToBuffer 32 32
+# #
+# #
+# #
+# module shaders_cl/ReadConstantData
+# test2d ReadConstantArray readConstantData 32 1
+# test2d ReadConstantStruct readConstantData 32 1
+# #
+# module shaders_small_cl/ReadConstantData
+# test2d ReadConstantArray readConstantData 32 1
+# test2d ReadConstantStruct readConstantData 32 1
+# #
+# #
+# #
+# module shaders_cl/TestComparisons
+# test2d TestGreaterThanOrEqualTo testGtEq 32 32
+# #
+# module shaders_small_cl/TestComparisons
+# test2d TestGreaterThanOrEqualTo testGtEq 32 32
+# #
+# #
+# # Test signed integer comparisons
+# module shaders_cl/signcmp
+# test2d greaterthan signcmp 16 16
+# test2d lessthan signcmp 16 16
+# test2d greaterequal signcmp 16 16
+# test2d lessequal signcmp 16 16
+# test2d greaterthan_m2 signcmp 16 16
+# test2d greaterthan_const signcmp 8 8
+# test2d greaterthan_const_left signcmp 8 8
+# test2d greaterthan_const_vec2 signcmp 8 8
+# test2d greaterthan_const_vec4 signcmp 8 8

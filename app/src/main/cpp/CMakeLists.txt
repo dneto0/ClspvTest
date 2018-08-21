@@ -93,6 +93,7 @@ set(CLSPV_FLAGS ${CLSPV_FLAGS} -hack-inserts)
 set(CLSPV_FLAGS ${CLSPV_FLAGS} -hack-undef)
 set(CLSPV_FLAGS ${CLSPV_FLAGS} -hack-scf)
 set(CLSPV_FLAGS ${CLSPV_FLAGS} -pod-ubo)
+set(CLSPV_FLAGS ${CLSPV_FLAGS} -no-dra)
 
 set(OPENCL_KERNELS
         Fills
